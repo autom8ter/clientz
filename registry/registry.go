@@ -2,6 +2,8 @@ package oauth
 
 import "golang.org/x/oauth2"
 
+//This List is a Work in Progress. Taken from https://github.com/golang/oauth2
+
 var Facebook = oauth2.Endpoint{
 	AuthURL:  "https://www.facebook.com/v3.1/dialog/oauth",
 	TokenURL: "https://graph.facebook.com/v3.1/oauth/access_token",

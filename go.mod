@@ -2,7 +2,7 @@ module github.com/autom8ter/clientz
 
 require (
 	cloud.google.com/go v0.36.0
-	firebase.google.com/go v3.6.0+incompatible
+	firebase.google.com/go v3.6.0+incompatible // indirect
 	github.com/Microsoft/go-winio v0.4.11 // indirect
 	github.com/bluele/slack v0.0.0-20180528010058-b4b4d354a079
 	github.com/cenkalti/backoff v2.1.1+incompatible // indirect
