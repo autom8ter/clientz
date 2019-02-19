@@ -11,6 +11,7 @@ import (
 	"firebase.google.com/go"
 	"github.com/bluele/slack"
 	"github.com/dghubble/go-twitter/twitter"
+	docker "github.com/docker/docker/client"
 	"github.com/huandu/facebook"
 	"github.com/logpacker/PayPal-Go-SDK"
 	"github.com/sfreiberg/gotwilio"
@@ -18,16 +19,13 @@ import (
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/cloudiot/v1"
 	"google.golang.org/api/cloudkms/v1"
-	"k8s.io/client-go/kubernetes"
-	"net/http"
 	talent "google.golang.org/api/jobs/v3"
-	docker "github.com/docker/docker/client"
+	"k8s.io/client-go/kubernetes"
+	firest "github.com/autom8ter/clientz/pkg/google/firestore"
+
 )
 
 type Google struct {
-	Project string
-	Bucket  string
-	Handler http.HandlerFunc
 	store   *firestore.Client
 	config  *firebase.Config
 	blob    *storage.Client
@@ -41,10 +39,33 @@ type Google struct {
 	robots 	*cloudiot.Service
 	tlent 	*talent.Service
 }
+func NewGoogle() *Google {
+	return &Google{
+		store:  firest.New(),
+		config: nil,
+		blob:   nil,
+		auth:   nil,
+		creds:  nil,
+		lang:   nil,
+		pub:    nil,
+		spch:   nil,
+		vis:    nil,
+		vid:    nil,
+		robots: nil,
+		tlent:  nil,
+	}
+}
 
 type Social struct {
 	fb *facebook.App
 	twit *twitter.Client
+}
+
+func NewSocial() *Social {
+	return &Social{
+		fb:   nil,
+		twit: nil,
+	}
 }
 
 type Messenger struct {
@@ -52,16 +73,35 @@ type Messenger struct {
 	slck *slack.Slack
 }
 
+func NewMessenger() *Messenger {
+	return &Messenger{
+		twil: nil,
+		slck: nil,
+	}
+}
 
 type Payment struct {
 	pal *paypalsdk.Client
 	strp *stripe.API
 }
 
+func NewPayment() *Payment {
+	return &Payment{
+		pal:  nil,
+		strp: nil,
+	}
+}
 
 type Containers struct {
 	dkr *docker.Client
 	kube *kubernetes.Clientset
+}
+
+func NewContainers() *Containers {
+	return &Containers{
+		dkr:  nil,
+		kube: nil,
+	}
 }
 
 
